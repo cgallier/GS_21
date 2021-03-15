@@ -22,8 +22,9 @@ library(multiwayvcov)
 library(scales)
 
 # Directory ---------------------------------------------------------------
-getwd()  # Where is the current working Directory?
-setwd("C:/Users/cgi/2020/BMBF InFairCom/02 WP3/StockGame/Paper/JEBO/Paper/Revision3/Analysis") # Set working directory
+# If you want to set a local directory
+# getwd()  # Where is the current working Directory?
+# setwd() # Set working directory
 
 # Time stamp --------------------------------------------------------------------
 st=format(Sys.time() , "%Y-%m-%d_%H-%M") # Set time stamp y-m-d-h-m
@@ -1495,7 +1496,7 @@ exp_ph5_D_con <- data_long_con$exploited_D[data_long_con$phase==5&data_long_con$
 # age
 age <- data_long_con$Alter[data_long_con$phase==2&data_long_con$period==1]
 # female
-data_long_con$female[data_long_con$Geschlecht=="Männlich"] <- 0
+data_long_con$female[data_long_con$Geschlecht=="M?nnlich"] <- 0
 data_long_con$female[data_long_con$Geschlecht=="Weiblich"] <- 1
 data_long_con$female[data_long_con$Geschlecht==""] <- NA
 female <- data_long_con$female[data_long_con$phase==2&data_long_con$period==1]
