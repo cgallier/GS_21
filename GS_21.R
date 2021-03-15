@@ -823,8 +823,8 @@ stargazer(reg_1, r1,
 # Out of space - Table S3.1. Ratchet effects: Robustness checks
 stargazer(reg_2, r3,
           reg_3, r5,
-          type = "html", out = paste("TabA3.1_", st, ".doc",sep = ""),
-          title = "Table A3.1. Ratchet effects: Robustness checks", align = TRUE, no.space = TRUE,
+          type = "html", out = paste("TabS3.1_", st, ".doc",sep = ""),
+          title = "Table S3.1. Ratchet effects: Robustness checks", align = TRUE, no.space = TRUE,
           omit.stat = c("f","ser"),
           dep.var.caption = "Dependent Variable: Cooperation rate (in percent)",
           covariate.labels = c("strongR", "weakR",
@@ -1305,7 +1305,7 @@ for (i in 1:25) # i : subject; j : group_total; k phase
 # plausibility: check range
 summary(data_long_con$sum_own)
 
-# Excursus III -  Testing cumulated cont. level per participant -----------
+# Excursus IV -  Testing cumulated cont. level per participant -----------
 ## base vs. weakR
 # t-test
 BaseVsWeakR_T <- t.test(data_long_con$sum_own[data_long_con$period==5&data_long_con$treatment=="base"], 
@@ -1325,7 +1325,7 @@ BaseVsWeakR_T
 BaseVsWeakR_W <- wilcox.test(data_long_con$sum_own[data_long_con$period==5&data_long_con$treatment=="base"], 
                              data_long_con$sum_own[data_long_con$period==5&data_long_con$treatment=="strongR"])
 BaseVsWeakR_W
-# Excursus III: END -------------------------------------------------------
+# Excursus IV: END -------------------------------------------------------
 
 # Mean per group & phase
 for (i in 11:204) # i : group_total; j : phase
@@ -1346,13 +1346,6 @@ for (i in 1:5) # i : period; j : group_total; k : phase
 # plausability: check range
 summary(data_long_con$mean_all)
 
-# mean per group phase 1
-#for (i in 11:204) # i : group_total; j : phase
-#  for (j in 1:5) {  
-#    data_long_con$mean_group[data_long_con$group_total==i&data_long_con$phase == j] <- 
-#      mean(data_long_con$q[data_long_con$group_total==i&data_long_con$phase == j])
-#  }
-
 # sum per group & phase
 for (i in 11:204) # i : group_total; j : phase
   for (j in 1:5) {  
@@ -1361,26 +1354,6 @@ for (i in 11:204) # i : group_total; j : phase
   }
 # plausability: check range
 summary(data_long_con$sum_group)
-
-# Mean own contribution per phase
-#for (i in 1:25) # i : subject; j : group_total; k phase
-#  for (j in 11:204)
-#    for (k in 1:5){
-#      data_long_con$mean_own[data_long_con$subject==i&data_long_con$group_total==j&data_long_con$phase == k] <- 
-#        mean(data_long_con$q[data_long_con$subject==i&data_long_con$group_total==j&data_long_con$phase==k])
-#    }
-# plausability
-#summary(data_long_con$mean_own)
-
-# Sum own contribution per phase
-#for (i in 1:25) # i : subject; j : group_total; k phase
-#  for (j in 11:204)
-#    for (k in 1:5){
-#      data_long_con$sum_own[data_long_con$subject==i&data_long_con$group_total==j&data_long_con$phase == k] <- 
-#        sum(data_long_con$q[data_long_con$subject==i&data_long_con$group_total==j&data_long_con$phase==k])
-#    }
-# plausability
-#summary(data_long_con$sum_own)
 
 # Sum rest contributions
 data_long_con$sum_rest <- data_long_con$sum_group-data_long_con$sum_own
@@ -1616,12 +1589,11 @@ data_exploited_con_long$exploitation_num_prev <- ifelse(data_exploited_con_long$
 data_exploited_con_long <- subset(data_exploited_con_long, data_exploited_con_long$exploitation_prev>=0)
 
 
-# Regressions -------------------------------------------------------------
-
-
 ###
 # Table 3. Exploitation effect 
 ###
+
+# Regressions -------------------------------------------------------------
 
 ## Model 1
 # OLS
@@ -1806,7 +1778,7 @@ stargazer(Reg_Exp_1, rE1, # Model 1 - GAP
                                "gap x strongR", "gap x weakR",
                                "exploitation x strongR", "exploitation x weakR"))
 
-# Out of space - Table A3.2. Exploitation effect: Robustness checks - OLS with standard errors cluster at the group level
+# Out of space - Table S3.2. Exploitation effect: Robustness checks - OLS with standard errors cluster at the group level
 stargazer(Reg_Exp_1, rE2, # Model 1 - GAP
           Reg_Exp_2, rE5, # Model 2 - GAP only those who have been exploited
           Reg_Exp_3, rE8, # Model 3 - Exploitation
@@ -1816,8 +1788,8 @@ stargazer(Reg_Exp_1, rE2, # Model 1 - GAP
           Reg_Exp_7, rE20, # Model 7 - GAP
           Reg_Exp_8, rE23, # Model 8 - GAP only those who have been exploited
           Reg_Exp_9, rE26, # Model 9 - Exploitation
-          type = "html", out = paste("TabA3.2_OLS_", st, ".doc",sep = ""),
-          title = "Table A3.2 Exploitation effect: Robustness checks - OLS", align = TRUE, no.space = TRUE,
+          type = "html", out = paste("TabS3.2_OLS_", st, ".doc",sep = ""),
+          title = "Table S3.2 Exploitation effect: Robustness checks - OLS", align = TRUE, no.space = TRUE,
           omit.stat = c("f","ser"),
           dep.var.caption = "Dependent Variable: Cumulated cooperation rate per phase (in percent)",
           covariate.labels = c("gap", "exploitation",
@@ -1826,7 +1798,7 @@ stargazer(Reg_Exp_1, rE2, # Model 1 - GAP
                                "gap x strongR", "gap x weakR",
                                "exploitation x strongR", "exploitation x weakR", "Log(scale)"))
 
-# Out of space - C'ont. Table A3.2. Exploitation effect: Robustness checks - Tobit
+# Out of space - C'ont. Table S3.2. Exploitation effect: Robustness checks - Tobit
 stargazer(Reg_Exp_1_T, rE3, # Model 1 - GAP
           Reg_Exp_2_T, rE6, # Model 2 - GAP only those who have been exploited
           Reg_Exp_3_T, rE9, # Model 3 - Exploitation
@@ -1836,26 +1808,17 @@ stargazer(Reg_Exp_1_T, rE3, # Model 1 - GAP
           Reg_Exp_7_T, rE21, # Model 7 - GAP
           Reg_Exp_8_T, rE24, # Model 8 - GAP only those who have been exploited
           Reg_Exp_9_T, rE27,  # Exploitation
-          type = "html", out = paste("TabA3.2_Tobit_", st, ".doc",sep = ""),
-          title = "Table A3.2 Exploitation effect: Robustness checks - Tobit", align = TRUE, no.space = TRUE,
+          type = "html", out = paste("TabS3.2_Tobit_", st, ".doc",sep = ""),
+          title = "Table S3.2 Exploitation effect: Robustness checks - Tobit", align = TRUE, no.space = TRUE,
           omit.stat = c("f","ser"),
           dep.var.caption = "Dependent Variable: Cumulated cooperation rate per phase (in percent)")
 
 
-# Excursus IV - Exploitation effect with GAP^2 ----------------------------
+# Excursus V - Exploitation effect with GAP^2 ----------------------------
 # data preparation
 data_exploited_con_long$GAP <- data_exploited_con_long$exploitation_num_prev
 data_exploited_con_long$GAP2 <- data_exploited_con_long$exploitation_num_prev^2
-# Regresssions
-# plausibility
-#Exp_GAP <- lm(value ~ GAP + sum_prev, data_exploited_con_long)
-#summary(Exp_GAP)
-#reg_r0 <- coeftest(Exp_GAP, vcov = vcovHC(Exp_GAP, type = "HC0"))
-#reg_r0
-# with standard errors clustered at the group level
-#v <- cluster.vcov(Exp_GAP, data_exploited_con_long$group.f)
-#reg_r02 <- coeftest(Exp_GAP, v)
-#reg_r02
+# Regression
 Exp_GAP2_1 <-lm(value ~ GAP + GAP2 +sum_prev, data_exploited_con_long)
 summary(Exp_GAP2_1)
 # with heteroskedasticity robust standard error 
@@ -1865,10 +1828,7 @@ rGAP2_1
 v <- cluster.vcov(Exp_GAP2_1, data_exploited_con_long$group.f)
 rGAP2_2 <- coeftest(Exp_GAP2_1, v)
 rGAP2_2
-
-#### NEW 
-# Robustness
-# data preparation
+# Robustness: Those who have been exploited
 # data preparation
 data_exploited_con_long_ex$GAP <- data_exploited_con_long_ex$exploitation_num_prev
 data_exploited_con_long_ex$GAP2 <- data_exploited_con_long_ex$exploitation_num_prev^2
@@ -1884,7 +1844,6 @@ rGAP2_4 <- coeftest(Exp_GAP2_2, v)
 rGAP2_4
 
 
-# Table 
 # out of space - Table R4
 stargazer(Exp_GAP2_1, rGAP2_1, rGAP2_2, # all
           Exp_GAP2_2, rGAP2_3, rGAP2_4, # only those who have been exploited
@@ -1892,6 +1851,7 @@ stargazer(Exp_GAP2_1, rGAP2_1, rGAP2_2, # all
           title = "Table R4. GAP^2", align = TRUE, no.space = TRUE,
           omit.stat = c("f","ser"),
           dep.var.caption = "Dependent Variable: Cumulated cooperation rate per phase (in percent)")
+
 # Excursus IV - END -------------------------------------------------------
 
 
