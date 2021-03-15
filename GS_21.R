@@ -1842,8 +1842,6 @@ rGAP2_3
 v <- cluster.vcov(Exp_GAP2_2, data_exploited_con_long_ex$group.f)
 rGAP2_4 <- coeftest(Exp_GAP2_2, v)
 rGAP2_4
-
-
 # out of space - Table R4
 stargazer(Exp_GAP2_1, rGAP2_1, rGAP2_2, # all
           Exp_GAP2_2, rGAP2_3, rGAP2_4, # only those who have been exploited
@@ -1862,6 +1860,7 @@ stargazer(Exp_GAP2_1, rGAP2_1, rGAP2_2, # all
 # Data
 Reg_Exp_9 <- lm(value ~ exploitation_prev * treatment.f + sum_prev, data_exploited_con_long)
 
+# Regressions
 # baseline
 reg_base_Exp <- linearHypothesis(Reg_Exp_9, "exploitation_prev = 0", verbose = TRUE, vcov = vcovHC(Reg_Exp_9, type = "HC0")) # vcov.= function(y) cluster.vcov(y, ~ group.f, df_correction = TRUE)
 # weakR
@@ -1895,7 +1894,7 @@ CIs <- as.vector(cbind(reg_base_Exp_CI, reg_weakR_Exp_CI, reg_strongR_Exp_CI))
 data_exp <- data.frame(Treatments, Trend, CIs)
 data_exp$Treatments <- factor(data_exp$Treatments, c("base","weakR","strongR"))
 
-# plot
+# Fig. 4. Exploitation effect by treatment
 exp_plot <- ggplot(data_exp, aes(x=as.factor(Treatments), y=(Trend), fill=Treatments)) +
   theme_minimal() +
   ylim(-15,5) +
@@ -1942,12 +1941,10 @@ Reg_II_1 <- lm(sum_2_con ~ exp_ph1_D_con * treatment.f + sum_1_con, data_exploit
 summary(Reg_II_1)
 # with heteroskedasticity robust standard error 
 rII1 <- coeftest(Reg_II_1, vcov = vcovHC(Reg_II_1, type = "HC0"))
-rII1 
 # Robustness
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_II_1, data_exploited_con$group.f)
 rII2 <- coeftest(Reg_II_1, v)
-rII2
 # Tobit
 Reg_II_1_T <- tobit(sum_2_con ~ exp_ph1_D_con * treatment.f + sum_1_con,
                      left = -20, right = 113.33,
@@ -1957,19 +1954,16 @@ summary(Reg_II_1_T)
 rII3 <- coeftest(Reg_II_1_T, vcov. = vcovCL(Reg_II_1_T, 
                                               cluster = data_exploited_con$group.f, 
                                               type = "HC0"))
-rII3
 
 # Model 2 - OLS - GAP
 Reg_II_2 <- lm(sum_2_con ~ exp_ph1_con * treatment.f + sum_1_con, data_exploited_con)
 summary(Reg_II_2)
 # with heteroskedasticity robust standard error 
 rII4 <- coeftest(Reg_II_2, vcov = vcovHC(Reg_II_2, type = "HC0"))
-rII4
 # robustness
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_II_2, data_exploited_con$group.f)
 rII5 <- coeftest(Reg_II_2, v)
-rII5
 # Tobit
 Reg_II_2_T <- tobit(sum_2_con ~ exp_ph1_con * treatment.f + sum_1_con,
                     left = -20, right = 113.33,
@@ -1984,12 +1978,10 @@ Reg_III_1 <- lm(sum_3_con ~ exp_ph2_D_con * treatment.f + sum_2_con, data_exploi
 summary(Reg_III_1)
 # with heteroskedasticity robust standard error 
 rIII1 <- coeftest(Reg_III_1, vcov = vcovHC(Reg_III_1, type = "HC0"))
-rIII1 
 # robustness
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_III_1, data_exploited_con$group.f)
 rIII2 <- coeftest(Reg_III_1, v)
-rIII2
 # Tobit
 Reg_III_1_T <- tobit(sum_3_con ~ exp_ph2_D_con * treatment.f + sum_2_con,
                     left = -20, right = 113.33,
@@ -1999,19 +1991,16 @@ summary(Reg_III_1_T)
 rIII3 <- coeftest(Reg_III_1_T, vcov. = vcovCL(Reg_III_1_T, 
                                             cluster = data_exploited_con$group.f, 
                                             type = "HC0"))
-rIII3
 
 # Model 4 - OLS - GAP
 Reg_III_2 <- lm(sum_3_con ~ exp_ph2_con * treatment.f + sum_2_con, data_exploited_con)
 summary(Reg_III_2)
 # with heteroskedasticity robust standard error 
 rIII4 <- coeftest(Reg_III_2, vcov = vcovHC(Reg_III_2, type = "HC0"))
-rIII4
 # robustness
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_III_2, data_exploited_con$group.f)
 rIII5 <- coeftest(Reg_III_2, v)
-rIII5
 # Tobit
 Reg_III_2_T <- tobit(sum_3_con ~ exp_ph2_con * treatment.f + sum_2_con,
                         left = -20, right = 113.33,
@@ -2019,7 +2008,6 @@ Reg_III_2_T <- tobit(sum_3_con ~ exp_ph2_con * treatment.f + sum_2_con,
 rIII6 <- coeftest(Reg_III_2_T, vcov. = vcovCL(Reg_III_2_T, 
                                                     cluster = data_exploited_con$group.f, 
                                                     type = "HC0"))
-rIII6
 
 # Phase Iv
 # Model 5 - OLS - Exploitation 
@@ -2027,12 +2015,10 @@ Reg_IV_1 <- lm(sum_4_con ~ exp_ph3_D_con * treatment.f + sum_3_con, data_exploit
 summary(Reg_IV_1)
 # with heteroskedasticity robust standard error 
 rIV1 <- coeftest(Reg_IV_1, vcov = vcovHC(Reg_IV_1, type = "HC0"))
-rIV1
 # robustness
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_IV_1, data_exploited_con$group.f)
 rIV2 <- coeftest(Reg_IV_1, v)
-rIV2
 # Tobit
 Reg_IV_1_T <- tobit(sum_4_con ~ exp_ph3_D_con * treatment.f + sum_3_con,
                     left = -20, right = 113.33,
@@ -2042,18 +2028,15 @@ summary(Reg_IV_1_T)
 rIV3 <- coeftest(Reg_IV_1_T, vcov. = vcovCL(Reg_IV_1_T, 
                                             cluster = data_exploited_con$group.f, 
                                             type = "HC0"))
-rIV3
 
 # Model 6 - OLS - GAP 
 Reg_IV_2 <- lm(sum_4_con ~ exp_ph3_con * treatment.f + sum_3_con, data_exploited_con)
 summary(Reg_IV_2)
 # with heteroskedasticity robust standard error 
 rIV4 <- coeftest(Reg_IV_2, vcov = vcovHC(Reg_IV_2, type = "HC0"))
-rIV4 
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_IV_2, data_exploited_con$group.f)
 rIV5 <- coeftest(Reg_IV_2, v)
-rIV5
 # Tobit
 Reg_IV_2_T <- tobit(sum_4_con ~ exp_ph3_con * treatment.f + sum_3_con,
                         left = -20, right = 113.33,
@@ -2062,7 +2045,6 @@ Reg_IV_2_T <- tobit(sum_4_con ~ exp_ph3_con * treatment.f + sum_3_con,
 rIV6 <- coeftest(Reg_IV_2_T, vcov. = vcovCL(Reg_IV_2_T, 
                                                     cluster = data_exploited_con$group.f, 
                                                     type = "HC0"))
-rIV6
 
 # Phase V
 # Model 7 - OLS - Exploitation
@@ -2070,12 +2052,10 @@ Reg_V_1 <- lm(sum_5_con ~ exp_ph4_D_con * treatment.f + sum_4_con, data_exploite
 summary(Reg_V_1)
 # with heteroskedasticity robust standard error 
 rV1 <- coeftest(Reg_V_1, vcov = vcovHC(Reg_V_1, type = "HC0"))
-rV1
 # robustness
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_V_1, data_exploited_con$group.f)
 rV2 <- coeftest(Reg_V_1, v)
-rV2
 # Tobit
 Reg_V_1_T <- tobit(sum_5_con ~ exp_ph4_D_con * treatment.f + sum_4_con,
                     left = -20, right = 113.33,
@@ -2090,12 +2070,10 @@ Reg_V_2 <- lm(sum_5_con ~ exp_ph4_con * treatment.f + sum_4_con, data_exploited_
 summary(Reg_V_2)
 # with heteroskedasticity robust standard error 
 rV4 <- coeftest(Reg_V_2, vcov = vcovHC(Reg_V_2, type = "HC0"))
-rV4
 # robustness
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_V_2, data_exploited_con$group.f)
 rV5 <- coeftest(Reg_V_2, v)
-rV5
 # Tobit
 Reg_V_2_T <- tobit(sum_5_con ~ exp_ph4_con * treatment.f + sum_4_con,
                         left = -20, right = 113.33,
@@ -2104,25 +2082,24 @@ rV6 <- coeftest(Reg_V_2_T, vcov. = vcovCL(Reg_V_2_T,
                                                     cluster = data_exploited_con$group.f, 
                                                     type = "HC0"))
 
-# Tables
-# Out of space - Table A3.3: Exploitation effect by phase: Robustness checks included - Exploitation
+# Out of space - Table S3.3: Exploitation effect by phase: Robustness checks included - Exploitation
 stargazer(Reg_II_1, rII1 , rII2 , Reg_II_1_T, rII3 , # Phase II
           Reg_III_1, rIII1, rIII2, Reg_III_1_T, rIII3, # Phase III
           Reg_IV_1, rIV1, rIV2, Reg_IV_1_T, rIV3, # Phase IV
           Reg_V_1, rV1, rV2, Reg_V_1_T, rV3, # Phase V
-          type = "html", out = paste("TabA3.3_Exploitation_", st, ".doc",sep = ""),
-          title = "Table A3.3 Exploitation effect per phase: Robustness checks included - Exploitation", align = TRUE, no.space = TRUE,
+          type = "html", out = paste("TabS3.3_Exploitation_", st, ".doc",sep = ""),
+          title = "Table S3.3 Exploitation effect per phase: Robustness checks included - Exploitation", align = TRUE, no.space = TRUE,
           omit.stat = c("f","ser"),
           dep.var.caption = "Dependent Variable: Cumulated cooperation rate per phase (in percent)")
 
 
-# Out of space - Table A3.3: Exploitation effect by phase: Robustness checks included - GAP
+# Out of space - Table S3.3: Exploitation effect by phase: Robustness checks included - GAP
 stargazer(Reg_II_2, rII4 , rII5 , Reg_II_2_T, rII6, # Phase II
           Reg_III_2, rIII4 , rIII5 , Reg_III_2_T, rIII6, # Phase III
           Reg_IV_2, rIV4 , rIV5 , Reg_IV_2_T, rIV6, # Phase IV
           Reg_V_2, rV4 , rV5 , Reg_V_2_T, rV6, # Phase V
-          type = "html", out = paste("TabA3.3_GAP_", st, ".doc",sep = ""),
-          title = "Table A3.3 Exploitation effect per phase: Robustness checks included - GAP", align = TRUE, no.space = TRUE,
+          type = "html", out = paste("TabS3.3_GAP_", st, ".doc",sep = ""),
+          title = "Table S3.3 Exploitation effect per phase: Robustness checks included - GAP", align = TRUE, no.space = TRUE,
           omit.stat = c("f","ser"),
           dep.var.caption = "Dependent Variable: Cumulated cooperation rate per phase (in percent)")
 
@@ -2390,7 +2367,7 @@ reg_strongR_Exp_C # value
 reg_strongR_Exp_SE # se
 reg_strongR_Exp # p value
 
-# Part I - GAP
+# Part II - GAP
 # data
 Reg <- lm(sum_4_con ~ exp_ph3_con * treatment.f + sum_3_con, data_exploited_con)
 # Interactions
@@ -2465,7 +2442,7 @@ reg_strongR_Exp_C # value
 reg_strongR_Exp_SE # se
 reg_strongR_Exp # p value
 
-# Part I - GAP
+# Part II - GAP
 # data
 Reg <- lm(sum_5_con ~ exp_ph4_con * treatment.f + sum_4_con, data_exploited_con)
 # Interactions
