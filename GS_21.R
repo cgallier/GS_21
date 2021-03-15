@@ -368,7 +368,7 @@ data_plot$q_strongR_ph5_CIC <- cooprate(q_strongR_ph5 + q_strongR_ph5_CI) - coop
 ## Plot
 # Fig.1
 # out of space
-pdf(file = paste("Fig1_", st, ".pdf",sep = ""),
+pdf(file = paste("Fig2_", st, ".pdf",sep = ""),
     width = 11.00, 
     height = 7.00) 
 
@@ -805,7 +805,7 @@ r4 <- coeftest(reg_3, vcov = vcovHC(reg_3, type = "HC0"))
 v <- cluster.vcov(reg_3, data_short_phase$group.f)
 r5 <- coeftest(reg_3, v)
 
-# Out of space - Table 2. Ratchet effect
+# Out of space - Table 2. Ratchet effects
 stargazer(reg_1, r1,
           reg_2, r2,
           reg_3, r4,
@@ -820,7 +820,7 @@ stargazer(reg_1, r1,
                                "strongR x period 4", "weakR x period 4", 
                                "strongR x period 5", "weakR x period 5"))
      
-# Out of space - Table A3.1. Ratchet Effects: Robustness checks
+# Out of space - Table S3.1. Ratchet effects: Robustness checks
 stargazer(reg_2, r3,
           reg_3, r5,
           type = "html", out = paste("TabA3.1_", st, ".doc",sep = ""),
@@ -833,6 +833,7 @@ stargazer(reg_2, r3,
                                "strongR x period 3", "weakR x period 3",
                                "strongR x period 4", "weakR x period 4", 
                                "strongR x period 5", "weakR x period 5"))
+
 
 ###
 # Fig 3: Trends in cooperation rates per group by period and treatment
@@ -930,10 +931,11 @@ data_trend_v1 <- data.frame(Rounds,
                             Trends,
                             CIs,
                             Treatments)
-
 data_trend_v1$Treatments <- factor( data_trend_v1$Treatments, 
                                     levels = unique( as.character(data_trend_v1$Treatments)))
-# Fig.3
+
+
+# Fig.3. Trends in cooperation rates per group by period and treatment
 
 fig3 <- ggplot(data_trend_v1, aes(x=as.factor(Rounds), y=Trends, fill=Treatments)) +
   theme_minimal() +
@@ -982,18 +984,12 @@ t_strongR_avg_abs <- t_strongR_avg*0.01*(90-15)
 # test weakR vs. strongR 
 # in cooperation rates
 reg_E_1 <- lm(cooprate*100 ~ treatment.f * period.f,
-                 data = data_short_phase)
+              data = data_short_phase)
 linearHypothesis(reg_E_1, 
-                       "treatment.fstrongR:period.f5 = treatment.fweakR:period.f5", 
-                       verbose = TRUE, vcov = vcovHC(reg_E_1, type = "HC0"))
-#reg_all_3A <- lm(cooprate*0.25*(90-15) ~ treatment.f * period.f,
-#                 data = data_short_phase)
-#linearHypothesis(reg_all_3A, 
-#                       "treatment.fstrongR:period.f5 = treatment.fweakR:period.f5", 
-#                       verbose = TRUE, vcov = vcovHC(reg_all_3C, type = "HC0"))
+                 "treatment.fstrongR:period.f5 = treatment.fweakR:period.f5", 
+                 verbose = TRUE, vcov = vcovHC(reg_E_1, type = "HC0"))
 
 # Excursus I: END ---------------------------------------------------------
-
 
 ##
 # Result 2:
