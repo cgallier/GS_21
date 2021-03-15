@@ -2800,16 +2800,13 @@ data_qmin_long$eq <- ifelse(data_qmin_long$period > 1 & data_qmin_long$treatment
 data_qmin_long$treatment.f <- factor(data_qmin_long$treatment)
 data_qmin_long$period.f <- factor(data_qmin_long$period)
 data_qmin_long$subject.f <- factor(data_qmin_long$subject_total)
-
 data_qmin_long$strongR <- ifelse(data_qmin_long$treatment == "strongR", 1, 0) 
 data_qmin_long$strongR <- factor(data_qmin_long$strongR)
-
 data_qmin_long$p1 <- ifelse(data_qmin_long$period==1, 1,0)
 data_qmin_long$p2 <- ifelse(data_qmin_long$period==2, 1,0)
 data_qmin_long$p3 <- ifelse(data_qmin_long$period==3, 1,0)
 data_qmin_long$p4 <- ifelse(data_qmin_long$period==4, 1,0)
 data_qmin_long$p5 <- ifelse(data_qmin_long$period==5, 1,0)
-
 data_qmin_long$Sp1 <- ifelse(data_qmin_long$treatment=="strongR" &
                                data_qmin_long$period==1, 1, 0)
 data_qmin_long$Sp2 <- ifelse(data_qmin_long$treatment=="strongR" &
@@ -2820,7 +2817,6 @@ data_qmin_long$Sp4 <- ifelse(data_qmin_long$treatment=="strongR" &
                                data_qmin_long$period==4, 1, 0)
 data_qmin_long$Sp5 <- ifelse(data_qmin_long$treatment=="strongR" &
                                data_qmin_long$period==5, 1, 0)
-# Data reg.
 data_qmin <- subset(data_qmin_long, period > 1 & treatment.f != "base")
 data_qmin$treatment.f <- factor(data_qmin$treatment.f, level= c("weakR", "strongR"))
 data_qmin$group.f <- factor(data_qmin$group_total)
@@ -2839,12 +2835,10 @@ Reg_Qmin_1 <- lm(eq ~ treatment.f,
 summary(Reg_Qmin_1)
 # with  heteroskedasticity robust standard error 
 rQmin1 <- coeftest(Reg_Qmin_1, vcov = vcovHC(Reg_Qmin_1, type = "HC0"))
-rQmin1
 # robustness
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_Qmin_1, data_qmin$group.f)
 rQmin2 <- coeftest(Reg_Qmin_1, v)
-rQmin2
 # Tobit
 Reg_Qmin_1_T <- tobit(eq ~ strongR,
                      left = 0, right = 133,
@@ -2853,7 +2847,6 @@ Reg_Qmin_1_T <- tobit(eq ~ strongR,
 rQmin3 <- coeftest(Reg_Qmin_1_T , vcov. = vcovCL(Reg_Qmin_1_T , 
                                               cluster = data_qmin$group.f, 
                                               type = "HC0"))
-rQmin3
 
 
 # Model 2 
@@ -2863,12 +2856,10 @@ Reg_Qmin_2 <- lm(eq ~ treatment.f + period.f,
 summary(Reg_Qmin_2)
 # with  heteroskedasticity robust standard error 
 rQmin4 <- coeftest(Reg_Qmin_2, vcov = vcovHC(Reg_Qmin_2, type = "HC0"))
-rQmin4
 # robustness
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_Qmin_2, data_qmin$group.f)
 rQmin5 <- coeftest(Reg_Qmin_2, v)
-rQmin5
 # Tobit
 Reg_Qmin_2_T <- tobit(eq ~ strongR + p3 + p4 + p5,
                        left = 0, right = 133,
@@ -2877,7 +2868,6 @@ Reg_Qmin_2_T <- tobit(eq ~ strongR + p3 + p4 + p5,
 rQmin6 <- coeftest(Reg_Qmin_2_T , vcov. = vcovCL(Reg_Qmin_2_T , 
                                                 cluster = data_qmin$group.f, 
                                                 type = "HC0"))
-rQmin6
 
 # Model 3
 # OLS
@@ -2885,12 +2875,10 @@ Reg_Qmin_3 <- lm(eq ~  treatment.f*period.f, data_qmin)
 summary(Reg_Qmin_3)
 # with  heteroskedasticity robust standard error 
 rQmin7 <- coeftest(Reg_Qmin_3, vcov = vcovHC(Reg_Qmin_3, type = "HC0"))
-rQmin7
 # robustness
 # with standard errors clustered at the group level
 v <- cluster.vcov(Reg_Qmin_3, data_qmin$group.f)
 rQmin8 <- coeftest(Reg_Qmin_3, v)
-rQmin8
 # Tobit
 Reg_Qmin_3_T <- tobit(eq ~ strongR + p3 + p4 + p5 + Sp3 + Sp4 + Sp5, 
                     left = 0, right = 133,
@@ -2899,9 +2887,7 @@ Reg_Qmin_3_T <- tobit(eq ~ strongR + p3 + p4 + p5 + Sp3 + Sp4 + Sp5,
 rQmin9 <- coeftest(Reg_Qmin_3_T , vcov. = vcovCL(Reg_Qmin_3_T , 
                                                 cluster = data_qmin$group.f, 
                                                 type = "HC0"))
-rQmin9
 
-# Tables
 # Out of space - Table 5. Excess cooperation rates by treatment and period
 stargazer(Reg_Qmin_1, rQmin1,
           Reg_Qmin_2, rQmin4,
@@ -2914,43 +2900,14 @@ stargazer(Reg_Qmin_1, rQmin1,
                                "period 3", "period 4", "period 5",
                                "strongR x period 3", "strongR x period 4", "strongR x period 5"))
           
-# Out of space - Table A3.5. Excess cooperation rates by treatment and period: Robustness checks
+# Out of space - Table S3.5. Excess cooperation rates by treatment and period: Robustness checks
 stargazer(Reg_Qmin_1, rQmin2, # OLS 
           Reg_Qmin_1_T, rQmin3, # Tobit
           Reg_Qmin_2, rQmin5, # OLS
           Reg_Qmin_2_T, rQmin6, # Tobit
           Reg_Qmin_3, rQmin8, # OLS
           Reg_Qmin_3_T, rQmin9, # Tobit
-          type = "html", out = paste("TabA3.5_", st, ".doc",sep = ""))
-
-# Out of space 
-#stargazer(Qmin_reg_v0, Qmin_reg_v1, Qmin_reg,
-#          type = "html", out = "Qmin_reg.doc")
-
-
-# Out of space - robustness checks
-#stargazer(Qmin_reg_v1, r1, r2, r3,
-#          Qmin_reg_v2, r4, r5, r6,
-#          Qmin_reg, r7, r8, r9,
-#          type = "html", omit = "subject.f",
-#          out = "Table 5 robustness.doc")
-
-# Out of space - paper new with robust standard errors
-#stargazer(Qmin_reg_v1, r1,
-#          Qmin_reg_v2, r4,
-#          Qmin_reg, r7,
-#          type = "html", omit = "subject.f",
-#          out = "Table5NEW.doc")
-
-# Out of space - paper new robustness checks for appendix
-#stargazer(Qmin_reg_v1, r1, 
-#          Qmin_reg_v1_FS, r3,
-#          Qmin_reg_v2, r5,
-#          Qmin_reg_v2_FS, r6,
-#          Qmin_reg, r8,
-#          Qmin_reg_FS, r9,
-#          omit = "subject.f",
-#          type = "html", out = "TableA3.3_appendix.doc")
+          type = "html", out = paste("TabS3.5_", st, ".doc",sep = ""))
 
 ###
 # Fig 5. Deviation from minimum contribution level by treatment and period
