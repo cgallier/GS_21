@@ -2480,7 +2480,7 @@ reg_strongR_Exp_SE # se
 reg_strongR_Exp # p value
 
 ###
-# Table A3.4 Exploitation per treatment and phase
+# Table S3.4 Exploitation per treatment and phase
 ###
 
 # Part I: Level of exploitation 
@@ -2565,6 +2565,7 @@ t.test(data_new$value[data_new$treatment.f=="base"],data_new$value[data_new$trea
 # base vs. strongR
 t.test(data_new$value[data_new$treatment.f=="base"],data_new$value[data_new$treatment.f=="strongR"])
 
+# Just add a comment
 
 # Part II 
 # SD per group, period, & phase
