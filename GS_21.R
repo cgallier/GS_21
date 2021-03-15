@@ -991,13 +991,12 @@ linearHypothesis(reg_E_1,
 
 # Excursus I: END ---------------------------------------------------------
 
-##
-# Result 2:
+### Result 2:
 # In base, cooperation rates show a significant downward trend over time. 
 # Cooperation rates in weakR and strongR, in contrast, increase significantly over time. 
 ##
 
-### Tests
+### 
 # Differences across treatments: On average 
 ###
 
@@ -1031,8 +1030,8 @@ WeakRVsStrongR_W <- wilcox.test(data_short$cooprate[data_short$treatment=="weakR
                                data_short$cooprate[data_short$treatment=="strongR"])
 WeakRVsStrongR_W
 
-##
-# Result 3. On average, cooperation rates in weakR and strongR are significantly below the
+### Result 3. 
+# On average, cooperation rates in weakR and strongR are significantly below the
 # cooperation rates in base. The difference in cooperation rates between weakR and strongR 
 # is statistically indistinguishable from zero.
 ##
@@ -1184,6 +1183,8 @@ t.test(d$First_1, d$First_4, paired = TRUE)
 wilcox.test(d$First_1, d$First_4, paired = TRUE)
 t.test(d$First_1, d$First_5, paired = TRUE)
 wilcox.test(d$First_1, d$First_5, paired = TRUE)
+
+# Excursus II: END
 
 # NEW R&R3: check contributions of other: Zerlegung von 186 die mehr als 100 machen
 
