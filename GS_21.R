@@ -1,9 +1,10 @@
 ###########################################################################
 ### The Ratchet Effect in Social Dilemmas #################################
 ### Carlo Gallier & Bodo Sturm ############################################
-### JEBO R&R 3 ############################################################
+###########################################################################
 
-# This version: March, 2021
+### JEBO ##################################################################
+# This version: March, 2021 ###############################################
 
 # Packages ----------------------------------------------------------------
 
@@ -713,28 +714,6 @@ stderr(data_short_period$cooprate[data_short_period$treatment=="strongR"&data_sh
 # last period
 summary(data_short_period$cooprate[data_short_period$treatment=="strongR"&data_short_period$phase==5&data_short_period$period==5])*100
 stderr(data_short_period$cooprate[data_short_period$treatment=="strongR"&data_short_period$phase==5&data_short_period$period==5])*100
-
-# Cooperation rates in base across periods
-#summary(data_notshort$cooprate[data_notshort$treatment=="base"])
-#summary(data_notshort$cooprate[data_notshort$treatment=="base"&data_notshort$period==1])
-#summary(data_notshort$cooprate[data_notshort$treatment=="base"&data_notshort$period==2])
-#summary(data_notshort$cooprate[data_notshort$treatment=="base"&data_notshort$period==3])
-#summary(data_notshort$cooprate[data_notshort$treatment=="base"&data_notshort$period==4])
-#summary(data_notshort$cooprate[data_notshort$treatment=="base"&data_notshort$period==5])
-# Cooperation rates in weakR across periods
-#summary(data_notshort$cooprate[data_notshort$treatment=="weakR"])
-#summary(data_notshort$cooprate[data_notshort$treatment=="weakR"&data_notshort$period==1])
-#summary(data_notshort$cooprate[data_notshort$treatment=="weakR"&data_notshort$period==2])
-#summary(data_notshort$cooprate[data_notshort$treatment=="weakR"&data_notshort$period==3])
-#summary(data_notshort$cooprate[data_notshort$treatment=="weakR"&data_notshort$period==4])
-#summary(data_notshort$cooprate[data_notshort$treatment=="weakR"&data_notshort$period==5])
-# Cooperation rates in strongR across periods
-#summary(data_notshort$cooprate[data_notshort$treatment=="strongR"])
-#summary(data_notshort$cooprate[data_notshort$treatment=="strongR"&data_notshort$period==1])
-#summary(data_notshort$cooprate[data_notshort$treatment=="strongR"&data_notshort$period==2])
-#summary(data_notshort$cooprate[data_notshort$treatment=="strongR"&data_notshort$period==3])
-#summary(data_notshort$cooprate[data_notshort$treatment=="strongR"&data_notshort$period==4])
-#summary(data_notshort$cooprate[data_notshort$treatment=="strongR"&data_notshort$period==5])
 
 ## Tests
 
