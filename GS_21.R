@@ -3006,7 +3006,7 @@ data_qmin_plot <- data.frame(Rounds,
 data_qmin_plot$period.f <- as.factor(data_qmin_plot$Rounds)
 data_qmin_plot$Treatments <- factor(data_qmin_plot$Treatments, level=c("weakR", "strongR"))
 
-# Fig. 5
+# Fig. 5. Excess cooperation rates by treatment and period
 qmin_plot <- ggplot(data_qmin_plot, aes(x=period.f, y=EQ, fill=Treatments))+
   theme_minimal() +
   geom_bar(position=position_dodge(), stat="identity") +
