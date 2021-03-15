@@ -1184,12 +1184,12 @@ wilcox.test(d$First_1, d$First_4, paired = TRUE)
 t.test(d$First_1, d$First_5, paired = TRUE)
 wilcox.test(d$First_1, d$First_5, paired = TRUE)
 
-# Excursus II: END
+# Excursus II: END ----
 
 # NEW R&R3: check contributions of other: Zerlegung von 186 die mehr als 100 machen
 
-# Excursus XXX ----
-
+# Excursus III: Check those who cont. more than their group members ----
+# data preparation
 data_long$con_own <- data_long$q
 # Sum per group
 for (i in 1:5) 
@@ -1202,17 +1202,15 @@ data_long$con_other <- data_long$con_group-data_long$con_own
 # Mean others
 data_long$con_other_mean <- data_long$con_other/3
 # own diff
-data_long$diff_own <- abs(data_long$con_own-90)
+data_long$diff_own <- abs(data_long$con_own-90) # dev. from social optimum
 # other diff
-data_long$diff_other <- abs(data_long$con_other_mean-90)
-# Problems
+data_long$diff_other <- abs(data_long$con_other_mean-90) # dev. from social optimum
+# Troublemaker
 data_long$problems <- ifelse(data_long$con_own>90&(data_long$diff_own>data_long$diff_other), 1, 0)
 table(data_long$problems)
 
-# Excursus xxx - END -----
+# Excursus III: END ---- 
 
-
-# Excursus II: END ---------------------------------------------------------
 
 ###
 # Section 3.2  - What drives the ratchet effect?  -------------------------
