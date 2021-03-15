@@ -754,20 +754,17 @@ WeakVsStrongR_W_r1 <- wilcox.test(data_notshort$cooprate[data_notshort$treatment
                                   data_notshort$cooprate[data_notshort$treatment=="strongR"&data_notshort$period ==1])
 WeakVsStrongR_W_r1
 
-##
-# Result 1: 
+### Result 1:
 # At the beginning of each phase, cooperation rates in weakR and strongR are significantly lower
 # than those in base. The difference in cooperation rates between weakR and strongR
 # is statistically indistinguishable from zero
-##
+###
 
-## Regressions
-
+### Table 2 - Regressions
 # Data preparation
 data_short_phase$treatment.f <- factor(data_short_phase$treatment)
 data_short_phase$period.f <- factor(data_short_phase$period)
 data_short_phase$group.f <- factor(data_short_phase$group_total)
-
 data_short$treatment.f <- factor(data_short$treatment)
 data_short$group.f <- factor(data_short$group_total)
 
@@ -783,12 +780,6 @@ reg_1 <- lm(cooprate*100 ~ treatment.f,
 summary(reg_1)
 # with heteroskedasticity robust standard error
 r1 <- coeftest(reg_1, vcov = vcovHC(reg_1, type = "HC0"))
-# Robustness check: Tobit
-#reg_all_1C_T <- tobit(cooprate*100 ~ treatment.f,
-#                      left = -0.20*100, right = 1.13*100,
-#                      data = data_short)
-# with heteroskedasticity robust standard error
-#r1_T <- coeftest(reg_all_1C_T, vcov = vcovHC(reg_all_1C, type = "HC0"))
 
 ## Model 2
 # OLS
@@ -801,16 +792,6 @@ r2 <- coeftest(reg_2, vcov = vcovHC(reg_2, type = "HC0"))
 # with standard errors clustered at the group level
 v <- cluster.vcov(reg_2, data_short_phase$group.f)
 r3<- coeftest(reg_2, v)
-# Tobit
-#reg_all_2C_T <- tobit(cooprate*100 ~ treatment.f + period.f,
-#                      left = -0.20*100, right = 1.13*100,
-#                      data = data_short_phase)
-# with heteroskedasticity robust standard error
-#r2_T <- coeftest(reg_all_2C_T, vcov = vcovHC(reg_all_2C, type = "HC0"))
-# with standard errors clustered at the group level
-#r3_T <- coeftest(reg_all_2C_T, vcov. = vcovCL(reg_all_2C_T, 
-#                                              cluster = data_short_phase$group.f, 
-#                                              type = "HC0"))
 
 ## Model 3
 ## OLS
@@ -823,20 +804,6 @@ r4 <- coeftest(reg_3, vcov = vcovHC(reg_3, type = "HC0"))
 # with standard errors clustered at the group level
 v <- cluster.vcov(reg_3, data_short_phase$group.f)
 r5 <- coeftest(reg_3, v)
-## Tobit
-#reg_all_3C_T <- tobit(cooprate*100 ~ treatment.f * period.f,
-#                      left = -0.20*100, right = 1.13*100,
-#                      data = data_short_phase)
-#summary(reg_all_3C_T)
-# with heteroskedasticity robust standard error
-#r5_T <- coeftest(reg_all_3C_T, vcov = vcovHC(reg_all_3C, type = "HC0"))
-# with standard errors clustered at the group level
-#r6_T <- coeftest(reg_all_3C_T, vcov. = vcovCL(reg_all_3C_T, 
-#                                              cluster = data_short_phase$group.f, 
-#                                              type = "HC0"))
-
-
-# Tables
 
 # Out of space - Table 2. Ratchet effect
 stargazer(reg_1, r1,
