@@ -1,2 +1,5 @@
-# GS_21
- Data and script
+# The Ratchet Effect in Social Dilemmas
+# Carlo Gallier and Bodo Sturm
+# Data and script
+
+
