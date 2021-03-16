@@ -23,8 +23,8 @@ library(scales)
 
 # Directory ---------------------------------------------------------------
 # If you want to set a local directory
-# getwd()  # Where is the current working Directory?
-# setwd() # Set working directory
+# getwd()  # Where is the current working directory?
+# setwd() # Set working directory, e.g., "C:/Users/user01/directory01" 
 
 # Time stamp --------------------------------------------------------------------
 st=format(Sys.time() , "%Y-%m-%d_%H-%M") # Set time stamp y-m-d-h-m
