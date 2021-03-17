@@ -2108,7 +2108,7 @@ stargazer(Reg_II_2, rII4 , rII5 , Reg_II_2_T, rII6, # Phase II
 ###
 
 # Overall
-# Part I - Exploitation
+# Part I
 # data
 Reg <- lm(value ~ exploitation_prev * treatment.f + sum_prev, data_exploited_con_long)
 # baseline
@@ -2144,7 +2144,7 @@ reg_strongR_Exp_C # value
 reg_strongR_Exp_SE # se
 reg_strongR_Exp # p value
 
-# Part II - Exploitation
+# Part II
 # data
 Reg <- lm(value ~ exploitation_num_prev * treatment.f + sum_prev, data_exploited_con_long)
 # baseline
@@ -2182,7 +2182,7 @@ reg_strongR_Exp # p value
 
 
 # Phase II
-# Part I - Exploitation
+# Part I
 # data
 Reg  <- lm(sum_2_con ~ exp_ph1_D_con * treatment.f + sum_1_con, data_exploited_con)
 # in baseline
@@ -2218,7 +2218,7 @@ reg_strongR_Exp_C # value
 reg_strongR_Exp_SE # se
 reg_strongR_Exp # p value
 
-# Part II - Exploitation
+# Part II
 # data
 Exp_reg_5_c  <- lm(sum_2_con ~ exp_ph1_con * treatment.f + sum_1_con, data_exploited_con)
 # in baseline
@@ -2256,7 +2256,7 @@ reg_strongR_Exp # p value
 
 
 # Phase III
-# Part I - Exploitation
+# Part I
 # data
 Reg <- lm(sum_3_con ~ exp_ph2_D_con * treatment.f + sum_2_con, data_exploited_con)
 # Interactions
@@ -2293,7 +2293,7 @@ reg_strongR_Exp_C # value
 reg_strongR_Exp_SE # se
 reg_strongR_Exp # p value
 
-# Part II - GAP
+# Part II
 # data
 Reg <- lm(sum_3_con ~ exp_ph2_con * treatment.f + sum_2_con, data_exploited_con)
 # in baseline
@@ -2330,7 +2330,7 @@ reg_strongR_Exp_SE # se
 reg_strongR_Exp # p value
 
 # Phase IV
-# Part I - Exploitation
+# Part I
 Reg <- lm(sum_4_con ~ exp_ph3_D_con * treatment.f + sum_3_con, data_exploited_con)
 # Interactions
 # in baseline
@@ -2366,7 +2366,7 @@ reg_strongR_Exp_C # value
 reg_strongR_Exp_SE # se
 reg_strongR_Exp # p value
 
-# Part II - GAP
+# Part II 
 # data
 Reg <- lm(sum_4_con ~ exp_ph3_con * treatment.f + sum_3_con, data_exploited_con)
 # Interactions
@@ -2404,7 +2404,7 @@ reg_strongR_Exp_SE # se
 reg_strongR_Exp # p value
 
 # Phase V
-# Part I - Exploitation
+# Part I 
 # data
 Reg <- lm(sum_5_con ~ exp_ph4_D_con * treatment.f + sum_4_con, data_exploited_con)
 # Interactions
@@ -2441,7 +2441,7 @@ reg_strongR_Exp_C # value
 reg_strongR_Exp_SE # se
 reg_strongR_Exp # p value
 
-# Part II - GAP
+# Part II
 # data
 Reg <- lm(sum_5_con ~ exp_ph4_con * treatment.f + sum_4_con, data_exploited_con)
 # Interactions
